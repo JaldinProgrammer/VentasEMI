@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'date',
+        'total',
+        'sale_id',
+        'payment__type_id'
+    ];
+
+    public function payment_Type(){
+        return $this->belongsTo('App\Models\Payment_Type');
+    }
+
+    public function sale(){
+        return $this->belongsTo('App\Models\Sale');
+    }
+
 }

@@ -15,6 +15,10 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
+            $table->float('total');
+            $table->foreignId('sale_id')->constrained('sales');
+            $table->foreignId('payment__type_id')->constrained('payment__types');
             $table->timestamps();
         });
     }

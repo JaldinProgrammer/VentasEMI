@@ -15,6 +15,14 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->string('nit')->nullable();
+            $table->date('date');
+            $table->float('dedt')->nullable();
+            $table->float('total')->nullable();
+            $table->float('totalBeforeTax')->nullable();
+            $table->float('tax')->default('16.00');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('person_id')->constrained('people');
             $table->timestamps();
         });
     }

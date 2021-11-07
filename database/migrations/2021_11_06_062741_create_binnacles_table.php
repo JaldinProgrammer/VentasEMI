@@ -15,6 +15,10 @@ class CreateBinnaclesTable extends Migration
     {
         Schema::create('binnacles', function (Blueprint $table) {
             $table->id();
+            $table->string('action');
+            $table->string('entity');
+            $table->string('table');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

@@ -15,6 +15,10 @@ class CreateSaleDetailsTable extends Migration
     {
         Schema::create('sale__details', function (Blueprint $table) {
             $table->id();
+            $table->integer('amount');
+            $table->float('total');
+            $table->foreignId('sale_id')->constrained('sales');
+            $table->foreignId('product_id')->constrained('products');
             $table->timestamps();
         });
     }

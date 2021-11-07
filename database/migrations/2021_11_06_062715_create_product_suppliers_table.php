@@ -15,6 +15,11 @@ class CreateProductSuppliersTable extends Migration
     {
         Schema::create('product_suppliers', function (Blueprint $table) {
             $table->id();
+            $table->float('cost');
+            $table->float('total');
+            $table->integer('amount');
+            $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('supplier_id')->constrained('suppliers');
             $table->timestamps();
         });
     }
