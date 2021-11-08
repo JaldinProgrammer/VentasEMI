@@ -17,6 +17,7 @@ class CreatePeopleTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('nit');
+            $table->integer('status')->default('1'); //on = 1 , off = 0
             $table->integer('gender')->default('1'); // woman =1, man = 0
             $table->string('phone')->nullable();
             $table->string('email')->unique()->nullable();

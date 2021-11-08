@@ -25,7 +25,7 @@ class User extends Authenticatable
         'username',
     ];
     public function person(){
-        return $this->belongsTo('App\Models\Account');
+        return $this->belongsTo('App\Models\Person');
     }
     public function role(){
         return $this->belongsTo('App\Models\Role');

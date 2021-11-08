@@ -9,6 +9,8 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Binnacle;
+use App\Models\Person;
+use App\Models\Role;
 use Carbon\Carbon;
 class LoginController extends Controller
 {
@@ -41,37 +43,58 @@ class LoginController extends Controller
         return redirect('/');
     }
 
+    public function show(){
+        $users = User::where('status',1)->orderby('id','desc')->paginate(3);
+        $users->load('person');
+        $users->load('role');
+        return view('users.show',compact('users'));
+    }
+
+    public function showDeleted(){
+        $users = User::where('status',0)->orderby('id','desc')->paginate(3);
+        $users->load('person');
+        $users->load('role');
+        return view('users.show',compact('users'));
+    }
+
+    public function register($id){
+        $person = Person::findOrFail($id);
+        $roles = Role::all();
+        return view('users.registrer',compact('person'),compact('roles'));
+    }
+
     public function create(){
         //dd(request());
-        $name = User::where('user',request('user'))->get();
+        $name = User::where('username',request('username'))->get();
         //dd($name);
         if(sizeof($name)!=0 ){
             return back()->withErrors('Este nombre de usuario ya existe');
         }
         $credentials =   Request()->validate([
-            'phone' => ['string'],
-            'name' => ['required', 'string'],
-            'user' => ['required', 'string'],
-            'email' => ['email'],     
+            'username' => ['required', 'string'],   
             'password' => ['required', 'string', 'confirmed'],
+            'role_id' => ['required'],
         ]);
         User::create([
-            'phone' => request('phone'),
-            'name' => request('name'),
-            'user' => request('user'),
-            'email' => request('email'),   
+            'username' => request('username'),   
             'password' => Hash::make(request('password')),
+            'person_id' => request('person_id'),
+            'role_id' => request('role_id'),
         ]);
-        Binnacle::create([
-            'entity' => Request('user'),
-            'action' => "inserto",
-            'table' => "Usuarios",
-            'user_id'=> Auth::user()->id
-        ]);
-        return redirect()->route('user.all');
+        return redirect()->route('user.show');
     }
 
-    public function perfil(){
-        
+    public function delete($id){
+        $user = User::findOrFail($id);
+        $user->status = 0;
+        $user->update();
+        return redirect()->route('user.show');
+    }
+
+    public function restore($id){
+        $user = User::findOrFail($id);
+        $user->status = 1;
+        $user->update();
+        return redirect()->route('user.show');
     }
 }

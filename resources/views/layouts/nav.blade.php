@@ -41,7 +41,7 @@
               </li>
                   @can('admin')
                   <li class="nav-item fs-6" >
-                    <a class="nav-link fs-6" href="#">Equipo</a>
+                    <a class="nav-link fs-6" href="{{route('user.show')}}">Equipo</a>
                   </li>
                   <li class="nav-item fs-6" >
                     <a class="nav-link fs-6" href="#">Productos</a>
