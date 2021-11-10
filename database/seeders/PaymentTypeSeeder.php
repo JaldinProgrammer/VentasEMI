@@ -14,6 +14,13 @@ class PaymentTypeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('payment__types')->insert([
+            [
+                'name' => 'Pago por tarjeta'
+            ],
+            [   
+                'name' => 'Efectivo'
+            ]
+        ]);
     }
 }
