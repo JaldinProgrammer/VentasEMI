@@ -7,7 +7,7 @@ use App\Models\Payment_Type;
 use App\Models\Product;
 use App\Models\Sale;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class PaymentController extends Controller
 {
     public function show($id){
@@ -15,7 +15,7 @@ class PaymentController extends Controller
         $payments = Payment::where('sale_id', $sale->id)->paginate(5);
         $payments->load('sale');
         $payments->load('payment_Type');
-        return view('payments.show', compact('payments'));
+        return view('payments.show', compact('payments'), compact('sale'));
     }
 
     public function register($id){
@@ -25,22 +25,28 @@ class PaymentController extends Controller
     }
 
     public function create(Request $request){
+        $carbon = new Carbon('America/La_Paz');
         $credentials =   Request()->validate([
             'total' => ['required'],
-            'date' => ['required'],
-            'sales_id' => ['required'],
-            'payment_type_id' => ['required'],
+            'sale_id' => ['required'],
+            'payment__type_id' => ['required'],
         ]);
-        $sale = Sale::findOrFail($request['sales_id']);
-        $sale->dedt = $sale->dedt - $request['total'];
+        
+        $sale = Sale::findOrFail((int)$request['sale_id']);
+        if($sale->dedt < (float)$request['total']){
+            return back()->withErrors('sobrepasa el debito restante');
+        }
+        $sale->dedt = ($sale->dedt - (float)$request['total']);
         $sale->update();
+       // dd($sale);
         Payment::create([
             'total' => $request['total'],
-            'date' => $request['date'],
-            'sales_id' => $request['sales_id'],
-            'payment_type_id' => $request['payment_type_id'],
+            'date' => $carbon->now(),
+            'sale_id' => $request['sale_id'],
+            'payment__type_id' => $request['payment__type_id'],
         ]);
-        return redirect()->route('payments.show',$sale->id);
+        
+        return redirect()->route('payment.show',$sale->id);
     }
 }
  

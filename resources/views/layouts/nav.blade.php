@@ -44,16 +44,16 @@
                     <a class="nav-link fs-6" href="{{route('user.show')}}">Equipo</a>
                   </li>
                   <li class="nav-item fs-6" >
-                    <a class="nav-link fs-6" href="#">Productos</a>
+                    <a class="nav-link fs-6" href="{{route('product.show')}}">Productos</a>
                   </li>
                   <li class="nav-item fs-6" >
-                    <a class="nav-link fs-6" href="#">Categorias</a>
+                    <a class="nav-link fs-6" href="{{route('category.show')}}">Categorias</a>
                   </li>
                   <li class="nav-item fs-6" >
-                    <a class="nav-link fs-6" href="#">Proveedores</a>
+                    <a class="nav-link fs-6" href="{{route('supplier.show')}}">Proveedores</a>
                   </li>
                   <li class="nav-item fs-6" >
-                    <a class="nav-link fs-6" href="#">Tipo de pago</a>
+                    <a class="nav-link fs-6" href="{{route('productSupplier.show')}}">Compras de inventario</a>
                   </li>
                   @endcan
               <li class="nav-item">

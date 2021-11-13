@@ -15,7 +15,7 @@ class ProductSupplier extends Model
         'product_id',
         'supplier_id',
     ];
-
+    protected $dates = ['created_at', 'updated_at'];
     public function product(){
         return $this->belongsTo('App\Models\Product');
     }

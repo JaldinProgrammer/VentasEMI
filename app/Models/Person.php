@@ -15,7 +15,7 @@ class Person extends Model
         'phone',
         'email',
     ];
-
+    protected $dates = ['created_at', 'updated_at'];
     public function sales(){
         return $this->hasMany('App\Models\Sale');
     }

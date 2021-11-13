@@ -14,7 +14,7 @@ class Payment extends Model
         'sale_id',
         'payment__type_id'
     ];
-
+    protected $dates = ['created_at', 'updated_at', 'date'];
     public function payment_Type(){
         return $this->belongsTo('App\Models\Payment_Type');
     }

@@ -14,6 +14,7 @@ class Binnacle extends Model
         'table',
         'account_id'
     ];
+    protected $dates = ['created_at', 'updated_at'];
     public function account(){
         return $this->belongsTo('App\Models\Account');
     }

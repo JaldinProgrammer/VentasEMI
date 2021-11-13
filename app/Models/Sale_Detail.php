@@ -14,7 +14,7 @@ class Sale_Detail extends Model
         'sale_id',
         'product_id'
     ];
-
+    protected $dates = ['created_at', 'updated_at'];
     public function sale(){
         return $this->belongsTo('App\Models\Sale');
     }

@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductSupplier;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class ProductSupplierController extends Controller
 {
     public function show(){
-        $products = ProductSupplier::paginate(5);
-        $products->load('product');
-        $products->load('supplier');
-        return view('suppliers.show', compact('products'));
+        $productSuppliers = ProductSupplier::paginate(5);
+        $productSuppliers->load('product');
+        $productSuppliers->load('supplier');
+        return view('productSuppliers.show', compact('productSuppliers'));
     }
 
-    public function register(){
-        return view('ProductSuppliers.register');
+    public function register($id){
+        $product = Product::findOrFail($id);
+        $suppliers = Supplier::all();
+        return view('ProductSuppliers.register',compact('suppliers'), compact('product'));
     }
 
     public function create(Request $request){
@@ -27,7 +31,8 @@ class ProductSupplierController extends Controller
             'supplier_id' => ['required']
         ]);
         $product = Product::findOrFail($request['product_id']);
-        $product->amount+= $request['amount'];
+        $product->stock+= $request['amount'];
+        $product->update();
         ProductSupplier::create([
             'cost' => $request['cost'],
             'total' => $request['cost'] * $request['amount'],
@@ -35,7 +40,7 @@ class ProductSupplierController extends Controller
             'product_id' => $request['product_id'],
             'supplier_id' => $request['supplier_id'],
         ]);
-        return redirect()->route('ProductSuppliers.show');
+        return redirect()->route('productSupplier.show');
     }
     
     // public function edit($id){

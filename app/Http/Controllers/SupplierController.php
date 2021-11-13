@@ -23,18 +23,18 @@ class SupplierController extends Controller
         Supplier::create([
             'name' => $request['name']
         ]);
-        return redirect()->route('suppliers.show');
+        return redirect()->route('supplier.show');
     }
     
     public function edit($id){
-        $product = Supplier::findOrFail($id);
-        return view('suppliers.edit', compact('product'));
+        $supplier = Supplier::findOrFail($id);
+        return view('suppliers.edit', compact('supplier'));
     }
 
     public function update(Request $request, $id){
-        $product = Supplier::findOrFail($id);
-        $product->name = $request['name'];
-        $product->update();
-        return redirect()->route('suppliers.show');
+        $supplier = Supplier::findOrFail($id);
+        $supplier->name = $request['name'];
+        $supplier->update();
+        return redirect()->route('supplier.show');
     }
 }

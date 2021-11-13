@@ -11,6 +11,7 @@ class Payment_Type extends Model
     protected $fillable = [
         'name'
     ];
+    protected $dates = ['created_at', 'updated_at'];
     public function payments(){
         return $this->hasMany('App\Models\Payment');
     }

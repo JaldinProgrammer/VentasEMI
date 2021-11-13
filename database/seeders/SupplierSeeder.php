@@ -14,6 +14,20 @@ class SupplierSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('suppliers')->insert([
+
+            [
+                
+                'name' => 'Carnessa'
+            ],
+            [
+                
+                'name' => 'Milkilena'
+            ],
+            [
+                
+                'name' => 'Tetrapac'
+            ]
+        ]);
     }
 }

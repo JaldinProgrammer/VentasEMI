@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Person;
 use App\Models\Sale;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 class SaleController extends Controller
 {
     public function show($id){
         $person = Person::findOrFail($id);
-        $sales = Sale::where('sale_id', $person->id)->paginate(5);
+        $sales = Sale::where('person_id', $person->id)->paginate(5);
         $sales->load('user');
         $sales->load('person');
         return view('sales.show', compact('sales'));
@@ -21,22 +22,18 @@ class SaleController extends Controller
         return view('sales.register',compact('person'));
     }
 
-    public function create(Request $request){
-        $credentials =   Request()->validate([
-            'date' => ['required'],
-            'user_id' => ['required'],
-            'person_id' => ['required'],
-        ]);
-        
+    public function create($id){
+        $person = Person::findOrFail($id);
+        $carbon = new Carbon('America/Caracas');
         Sale::create([
-            'date' => $request['date'],
-            'user_id' => $request['user_id'],
-            'person_id' => $request['person_id'],
-            'tax' => 0,
+            'date' => $carbon->today(),
+            'user_id' => Auth::user()->id,
+            'person_id' => $id,
             'dedt' => 0,
             'total' => 0,
             'totalBeforeTax' => 0,
+            'nit' => ($person->nit!=null)?$person->nit:null,
         ]);
-        return redirect()->route('sales.show',$request['person_id']);
+        return redirect()->route('sale.show',$id);
     }
 }

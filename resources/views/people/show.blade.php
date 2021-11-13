@@ -43,7 +43,8 @@
                         <td>{{($user->email!=null)?$user->email:"---"}}</td>
                         <td>{{($user->nit!=null)?$user->nit:"---"}}</td>             
                         <td>
-                            <a href="#"><button type="button" class="btn btn-warning">Compras</button></a>
+                            <a href="{{route('sale.create',$user->id)}}"><button type="button" class="btn btn-success">Crear compra</button></a>
+                            <a href="{{route('sale.show',$user->id)}}"><button type="button" class="btn btn-warning">Facturas</button></a>
                             <a href="{{route('user.register',$user->id)}}"><button type="button" class="btn btn-warning">Crear cuenta</button></a>
                             <a href="{{route('people.edit',$user->id)}}"><button type="button" class="btn btn-warning">Editar</button></a>
                             @if ($user->status)

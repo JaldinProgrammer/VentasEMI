@@ -47,6 +47,14 @@ class PersonSeeder extends Seeder
                 'gender' => 0,
                 'nit' => '3431241231'
             ],
+            [
+                
+                'name' => 'Cristiano Ronaldo',
+                'phone' => '762342231',
+                'email' => 'cr7@gmail.com',
+                'gender' => 0,
+                'nit' => '231313432'
+            ],
         ]);
     }
 }

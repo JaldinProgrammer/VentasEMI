@@ -18,7 +18,7 @@ class Sale extends Model
         'user_id',
         'person_id',
     ];
-
+    protected $dates = ['created_at', 'updated_at', 'date'];
     public function payments(){
         return $this->hasMany('App\Models\Payment');
     }

@@ -11,6 +11,7 @@ class Supplier extends Model
     protected $fillable = [
         'name'
     ];
+    protected $dates = ['created_at', 'updated_at'];
     public function productSupplier(){
         return $this->hasMany('App\Models\ProductSupplier');
     }

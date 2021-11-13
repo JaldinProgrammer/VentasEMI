@@ -24,6 +24,7 @@ class User extends Authenticatable
         'status',
         'username',
     ];
+    protected $dates = ['created_at', 'updated_at'];
     public function person(){
         return $this->belongsTo('App\Models\Person');
     }

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function show(){
-        $categories = Category::paginate(5);
+        $categories = Category::orderby('id', 'desc')->paginate(5);
         return view('categories.show', compact('categories'));
     }
 
@@ -23,18 +23,18 @@ class CategoryController extends Controller
         Category::create([
             'name' => $request['name']
         ]);
-        return redirect()->route('categories.show');
+        return redirect()->route('category.show');
     }
     
     public function edit($id){
-        $product = Category::findOrFail($id);
-        return view('categories.edit', compact('product'));
+        $category = Category::findOrFail($id);
+        return view('categories.edit', compact('category'));
     }
 
     public function update(Request $request, $id){
-        $product = Category::findOrFail($id);
-        $product->name = $request['name'];
-        $product->update();
-        return redirect()->route('categories.show');
+        $category = Category::findOrFail($id);
+        $category->name = $request['name'];
+        $category->update();
+        return redirect()->route('category.show');
     }
 }

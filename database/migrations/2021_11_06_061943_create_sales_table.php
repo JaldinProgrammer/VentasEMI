@@ -20,7 +20,7 @@ class CreateSalesTable extends Migration
             $table->float('dedt')->nullable();
             $table->float('total')->nullable();
             $table->float('totalBeforeTax')->nullable();
-            $table->float('tax')->default('16.00');
+            $table->float('tax')->default('0.16');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('person_id')->constrained('people');
             $table->timestamps();

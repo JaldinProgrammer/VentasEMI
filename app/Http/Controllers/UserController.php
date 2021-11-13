@@ -17,7 +17,7 @@ class UserController extends Controller
 
     public function people(){
         
-        $users = Person::where('status',1)->orderby('id','desc')->paginate(3);
+        $users = Person::where('status',1)->orderby('id','desc')->paginate(5);
         return view('people.show',compact('users'));
     }
 

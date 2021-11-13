@@ -17,7 +17,7 @@ class CreateProductSuppliersTable extends Migration
             $table->id();
             $table->float('cost');
             $table->float('total');
-            $table->integer('amount');
+            $table->integer('amount')->default('0');
             $table->foreignId('product_id')->constrained('products');
             $table->foreignId('supplier_id')->constrained('suppliers');
             $table->timestamps();
