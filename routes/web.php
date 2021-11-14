@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductSupplierController;
@@ -85,3 +86,4 @@ Route::post('category/create',[CategoryController::class, 'create'])->name('cate
 Route::get('category/edit/{id}',[CategoryController::class, 'edit'])->name('category.edit');
 Route::post('category/update/{id}',[CategoryController::class, 'update'])->name('category.update');
 
+Route::get('invoice/exports/{id}',[InvoiceController::class, 'exports'])->name('invoice.exports');

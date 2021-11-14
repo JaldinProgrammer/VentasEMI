@@ -11,11 +11,12 @@
     </div>
     @endif
     <br>
-    <div class="container">
+    <div class="container" style="align-content: center">
         <br>
         <ul class="list-group list-group-flush">
             <li class="list-group-item"><h2>Ventas</h2></li>
             @if ($details[0]!=null)
+            <li class="list-group-item"><a href="{{route('invoice.exports',$details[0]->sale->id)}}"><button type="button" class="btn btn-success btn-sm btn-block">Exportar a PDF</button></a></li>
             <li class="list-group-item"> <a href="{{route('saleDetail.register',$details[0]->sale->id)}}" ><button type="button" class="btn btn-info btn-sm btn-block">Registrar nuevo detalle de venta</button></a></li>
             <li class="list-group-item"><a href="{{route('sale.show',$details[0]->sale->person->id)}}"><button type="button" class="btn btn-primary">Volver a facturas</button></a>  </li>
             @php
