@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class ProductSupplierController extends Controller
 {
     public function show(){
-        $productSuppliers = ProductSupplier::paginate(5);
+        $productSuppliers = ProductSupplier::orderby('id','desc')->paginate(5);
         $productSuppliers->load('product');
         $productSuppliers->load('supplier');
         return view('productSuppliers.show', compact('productSuppliers'));

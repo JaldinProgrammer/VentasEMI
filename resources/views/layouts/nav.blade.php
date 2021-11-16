@@ -33,37 +33,37 @@
               </li> 
                 @endguest
                 @auth
-              <li class="nav-item fs-6" >
-                <a class="nav-link fs-6" href="{{route('user.perfil')}}">{{Auth::user()->username}}</a>
-              </li>
-              <li class="nav-item fs-6" >
-                <a class="nav-link fs-6" href="{{route('people.show')}}">Clientes</a>
-              </li>
-                  @can('admin')
                   <li class="nav-item fs-6" >
-                    <a class="nav-link fs-6" href="{{route('user.show')}}">Equipo</a>
+                    <a class="nav-link fs-6" href="{{route('user.perfil')}}">{{Auth::user()->username}}</a>
                   </li>
                   <li class="nav-item fs-6" >
-                    <a class="nav-link fs-6" href="{{route('product.show')}}">Productos</a>
+                    <a class="nav-link fs-6" href="{{route('people.show')}}">Clientes</a>
                   </li>
-                  <li class="nav-item fs-6" >
-                    <a class="nav-link fs-6" href="{{route('category.show')}}">Categorias</a>
+                      @can('admin')
+                      <li class="nav-item fs-6" >
+                        <a class="nav-link fs-6" href="{{route('user.show')}}">Equipo</a>
+                      </li>
+                      <li class="nav-item fs-6" >
+                        <a class="nav-link fs-6" href="{{route('product.show')}}">Productos</a>
+                      </li>
+                      <li class="nav-item fs-6" >
+                        <a class="nav-link fs-6" href="{{route('category.show')}}">Categorias</a>
+                      </li>
+                      <li class="nav-item fs-6" >
+                        <a class="nav-link fs-6" href="{{route('supplier.show')}}">Proveedores</a>
+                      </li>
+                      <li class="nav-item fs-6" >
+                        <a class="nav-link fs-6" href="{{route('productSupplier.show')}}">Compras de inventario</a>
+                      </li>
+                      @endcan
+                  <li class="nav-item">
+                    <form style="display: inline" action="{{route('logout')}}" method="POST">
+                        @csrf
+                        <a class="nav-link" href="#" onclick="this.closest('form').submit()">
+                          <img src="{{asset('./Icons/logout.png')}}" alt="exit" width="25" height="25">
+                          {{"  Logout  "}}</a>
+                    </form>
                   </li>
-                  <li class="nav-item fs-6" >
-                    <a class="nav-link fs-6" href="{{route('supplier.show')}}">Proveedores</a>
-                  </li>
-                  <li class="nav-item fs-6" >
-                    <a class="nav-link fs-6" href="{{route('productSupplier.show')}}">Compras de inventario</a>
-                  </li>
-                  @endcan
-              <li class="nav-item">
-                <form style="display: inline" action="{{route('logout')}}" method="POST">
-                    @csrf
-                    <a class="nav-link" href="#" onclick="this.closest('form').submit()">
-                      <img src="{{asset('./Icons/logout.png')}}" alt="exit" width="25" height="25">
-                      {{"  Logout  "}}</a>
-                </form>
-              </li>
               @endauth 
             </ul>
           </div>

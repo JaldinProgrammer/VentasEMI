@@ -35,10 +35,10 @@
         <div class="container">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><b>Fecha : </b> {{$details[0]->sale->date->toFormattedDateString()}}</li>
-                <li class="list-group-item"><b>Debito : </b> {{$details[0]->sale->dedt}}</li>
-                <li class="list-group-item"><b>Total : </b> {{$details[0]->sale->total}}</li>
-                <li class="list-group-item"><b>Total antes del impuesto : </b> {{$details[0]->sale->totalBeforeTax}}</li>
-                <li class="list-group-item"><b>Debito : </b> {{$details[0]->sale->tax}}</li>
+                <li class="list-group-item"><b>Debito : </b> {{$details[0]->sale->dedt." BS"}}</li>
+                <li class="list-group-item"><b>Total : </b> {{$details[0]->sale->total." BS"}}</li>
+                <li class="list-group-item"><b>Total antes del impuesto : </b> {{$details[0]->sale->totalBeforeTax." BS"}}</li>
+                <li class="list-group-item"><b>Impuesto : </b> {{$details[0]->sale->tax. " %"}}</li>
                 <li class="list-group-item"><b>Cliente : </b> {{$details[0]->sale->person->name}}</li>
                 <li class="list-group-item"><b>Vendedor : </b> {{$details[0]->sale->user->username}}</li>
                 <li class="list-group-item"><b>NIT : </b> {{($details[0]->sale->nit!= null)?$details[0]->sale->nit: "----"}}</li>

@@ -46,7 +46,7 @@ class ProductController extends Controller
     public function update(Request $request, $id){
         $product = Product::findOrFail($id);
         $product->name = $request['name'];
-        $product->name = $request['price'];
+        $product->price = $request['price'];
         $product->update();
         return redirect()->route('product.show');
     }
